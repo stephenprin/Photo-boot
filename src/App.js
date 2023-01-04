@@ -9,42 +9,41 @@ const clientAccessKey = process.env.REACT_APP_ACCESS_KEY;
 const mainUrl = `https://api.unsplash.com/photos/`;
 const searchUrl = `https://api.unsplash.com/search/photos/`;
 
-
-const getStorageTheme = () => { 
+const getStorageTheme = () => {
   let theme = "light-theme";
-  if(localStorage.getItem('theme')) { 
-    theme = localStorage.getItem('theme')
+  if (localStorage.getItem("theme")) {
+    theme = localStorage.getItem("theme");
   }
   return theme;
-}
+};
 
 function App() {
-  const[theme, setTheme] = React.useState(getStorageTheme())
+  const [theme, setTheme] = React.useState(getStorageTheme());
   const [loading, setLoading] = React.useState(false);
   const [photos, setPhotos] = React.useState([]);
-  const [page, setPage] = React.useState(1);
-  const [query, setQuery] = React.useState([])
-  
-  useEffect(() => { 
-    localStorage.setItem('theme', theme)
-    document.documentElement.className = theme;
-  }, [theme] )
+  const [page, setPage] = React.useState(0);
+  const [query, setQuery] = React.useState('');
 
-  const toggleBtn = () => { 
-    if(theme === 'light-theme') { 
-      setTheme('dark-theme')
-    } else { 
-      setTheme('light-theme')
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.className = theme;
+  }, [theme]);
+
+  const toggleBtn = () => {
+    if (theme === "light-theme") {
+      setTheme("dark-theme");
+    } else {
+      setTheme("light-theme");
     }
-  }
+  };
 
   const fetchImages = async () => {
     let url;
     const urlPage = `&page=${page}`;
     const urlQuery = `&query=${query}`;
 
-    if (query) { 
-      url = `${searchUrl}?client_id=${clientAccessKey}${urlPage}?${urlQuery}`;
+    if (query) {
+      url = `${searchUrl}?client_id=${clientAccessKey}${urlPage}${urlQuery}`;
     } else {
       url = `${mainUrl}?client_id=${clientAccessKey}${urlPage}`;
     }
@@ -61,7 +60,7 @@ function App() {
           return [...oldPhotos, ...data.results];
         } else {
           return [...oldPhotos, ...data];
-         }
+        }
       });
       setLoading(false);
     } catch (error) {
@@ -93,20 +92,27 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchImages()
-    setPage(1)
-    
+  
+     setPage(1)
   };
   return (
     <main>
       <section className="search">
         <form className="search-form">
-          <input type="text" placeholder="search" className="form-input" value={query} onChange={(e)=>setQuery(e.target.value)} />
+          <input
+            type="text"
+            placeholder="search"
+            className="form-input"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
           <button type="submit" className="submit-btn" onClick={handleSubmit}>
             <FaSearch />
           </button>
         </form>
-        <button className="btn" onClick={toggleBtn}>Toggle</button>
+        <button className="btn" onClick={toggleBtn}>
+          Toggle
+        </button>
       </section>
       <section className="photos">
         <div className="photos-center">
