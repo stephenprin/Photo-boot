@@ -9,14 +9,34 @@ const clientAccessKey = process.env.REACT_APP_ACCESS_KEY;
 const mainUrl = `https://api.unsplash.com/photos/`;
 const searchUrl = `https://api.unsplash.com/search/photos/`;
 
+
+const getStorageTheme = () => { 
+  let theme = "light-theme";
+  if(localStorage.getItem('theme')) { 
+    theme = localStorage.getItem('theme')
+  }
+  return theme;
+}
+
 function App() {
+  const[theme, setTheme] = React.useState(getStorageTheme())
   const [loading, setLoading] = React.useState(false);
   const [photos, setPhotos] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState([])
   
+  useEffect(() => { 
+    localStorage.setItem('theme', theme)
+    document.documentElement.className = theme;
+  }, [theme] )
 
-  console.log(photos);
+  const toggleBtn = () => { 
+    if(theme === 'light-theme') { 
+      setTheme('dark-theme')
+    } else { 
+      setTheme('light-theme')
+    }
+  }
 
   const fetchImages = async () => {
     let url;
@@ -86,7 +106,7 @@ function App() {
             <FaSearch />
           </button>
         </form>
-        <button className="btn">Toggle</button>
+        <button className="btn" onClick={toggleBtn}>Toggle</button>
       </section>
       <section className="photos">
         <div className="photos-center">

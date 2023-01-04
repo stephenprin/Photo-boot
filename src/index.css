@@ -24,7 +24,7 @@ Variables
   --clr-grey-3: hsl(209, 34%, 30%);
   --clr-grey-4: hsl(209, 28%, 39%);
   /* grey used for paragraphs */
-  --clr-grey-5: hsl(210, 22%, 49%);
+  /* --clr-grey-5: hsl(208, 90%, 56%); */
   --clr-grey-6: hsl(209, 23%, 60%);
   --clr-grey-7: hsl(211, 27%, 70%);
   --clr-grey-8: hsl(210, 31%, 80%);
@@ -43,6 +43,25 @@ Variables
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --max-width: 1170px;
   --fixed-width: 620px;
+  /* --backgb-color-1: rgb(248, 242, 247);
+  --backgb-color-2: rgb(253, 250, 250); */
+ 
+}
+.dark-theme{
+  --clr-grey-5: hsl(208, 49%, 40%);
+  --backgb-color-1: rgba(50, 3, 46, 1);
+  --backgb-color-2: rgba(0, 0, 0, 1);
+  --clr-primary-btn: hsl(205, 72%, 37%);
+  --clr-btn:hsl(211, 89%, 69%);
+  --clr-grey-3:hsl(205, 72%, 37%);
+}
+.light-theme{
+  --clr-grey-5: hsl(42, 92%, 23%);
+  --backgb-color-1: rgb(248, 242, 247);
+  --backgb-color-2: rgb(253, 250, 250);
+  --clr-primary-btn: hsl(42, 92%, 23%);
+  --clr-btn:hsl(210, 21%, 76%);
+  --clr-grey-3:hsl(42, 92%, 23%);
 }
 /*
 =============== 
@@ -60,7 +79,7 @@ Global Styles
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: radial-gradient(ellipse at 50% 50%, rgba(50, 3, 46, 1) 0%, rgba(0, 0, 0, 1) 100%) no-repeat center center fixed;
+  background: radial-gradient(ellipse at 50% 50%, var(--backgb-color-1) 0%, var(--backgb-color-2) 100%) no-repeat center center fixed;
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
@@ -239,8 +258,8 @@ Stock Photos
   color: var(--clr-primary-9);
 }
 .btn {
-  background: var(--clr-primary-5);
-  color: var( --clr-primary-2);
+  background: var(--clr-primary-btn);
+  color: var( --clr-btn);
   padding: 0.25rem 0.5rem;
   border-radius: 5px;
   border-color: transparent;
